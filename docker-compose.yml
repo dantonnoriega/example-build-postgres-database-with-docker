@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+
+  db:
+    image: postgres:latest
+    restart: unless-stopped
+    environment:
+      - PGDATA=/var/lib/postgresql/data
+      - POSTGRES_PASSWORD=pass123
+    ports:
+      - '127.0.0.1:5432:5432'
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      - ./sql:/docker-entrypoint-initdb.d
+      - ./data:/data
+   
+volumes:
+  db-data:
