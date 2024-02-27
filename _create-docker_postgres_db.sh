@@ -55,7 +55,7 @@ docker exec -u postgres -it $CONTAINER psql -U postgres -d postgres \
     index TEXT,
     value DEC(5,1));"
 
-### Upload the CSV file from local volume mount $VOL to the table
+### copy the CSV file from local volume mount $VOL to the table
 CSV_FILE=$VOL/data/$TABLE_NAME.csv
 docker exec -u postgres -it $CONTAINER psql -U postgres -d postgres \
   -c "COPY $TABLE_NAME FROM '$CSV_FILE' WITH (FORMAT csv, HEADER true);"
@@ -67,7 +67,7 @@ docker exec -u postgres -it $CONTAINER psql -U postgres -d postgres \
     index TEXT,
     description TEXT);"
 
-### Upload the CSV file to the table
+### copy the CSV file to the table
 CSV_FILE=$VOL/data/$TABLE_NAME.csv
 docker exec -u postgres -it $CONTAINER psql -U postgres -d postgres \
   -c "COPY $TABLE_NAME FROM '$CSV_FILE' WITH (FORMAT csv, HEADER true);"
