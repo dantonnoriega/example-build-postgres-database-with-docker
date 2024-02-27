@@ -14,8 +14,8 @@ PWD=$(pwd)
 VOL="/home/$(basename $PWD)"
 
 # removed old DB (always start from scratch)
-rm -Rf $PWD/db-data/*
-mkdir -vp $PWD/db-data/pgdata
+rm -Rf $PWD/db-data
+mkdir -vp $PWD/db-data
 
 # look for open ports
 BASE_PORT=5432
@@ -32,7 +32,7 @@ done
 # run container
 docker run --rm \
   -p 127.0.0.1:$port:5432 -v $PWD/db-data:/var/lib/postgresql/data -v $PWD:$VOL \
-  -e POSTGRES_PASSWORD=pass123 -e PGDATA=/var/lib/postgresql/data/pgdata \
+  -e POSTGRES_PASSWORD=pass123 -e PGDATA=/var/lib/postgresql/data \
   -d postgres
 echo "connect via localhost — 127.0.0.1:$port"
 
